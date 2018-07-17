@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
+import Cart from "./cart/components/Cart";
+
 // V.dom
 export default class App extends  Component {
     constructor() {
@@ -31,6 +33,8 @@ export default class App extends  Component {
                 <Header  title={this.state.title}/>
                 <h1 id='myh'>Welcome to React</h1>
 
+                <Cart />
+                
                 <Home />
                 
                 <Footer title={this.state.title} 
