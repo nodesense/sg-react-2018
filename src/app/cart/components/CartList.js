@@ -1,6 +1,6 @@
 // CartList.js
 
-import React, {Component} from "react";
+import React, {Component, PureComponent} from "react";
 import PropTypes from "prop-types";
 
 import CartItem from "./CartItem";
@@ -13,11 +13,22 @@ export default class CartList extends Component {
     }
      
     //TODO: shouldComponentUpdate
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.items != this.props.items;
+    }
     
     render() {
         console.log("CartList Render");
 
         let {items} = this.props;
+
+        if (items.length == 0) {
+            return (
+                <div>
+                    <p> No Items in cart</p>
+                </div>
+            )
+        }
 
         return (
             <div> 
@@ -34,7 +45,17 @@ export default class CartList extends Component {
                 </thead>
                 <tbody>
                     {/* TODO props items map with CartItem */ }
-
+                    {
+                        items.map(item => (
+                            <CartItem item={item} 
+                                        key={item.id} 
+                                        removeItem={this.props.removeItem}
+                                        updateItem={this.props.updateItem}
+                                        
+                                        
+                                        />
+                        ))
+                    }   
                 </tbody>
             </table>
             </div>
@@ -43,9 +64,9 @@ export default class CartList extends Component {
 } 
 
 CartList.defaultProps = {
-    
+
 }
 
 CartList.propTypes = {
-    
+
 }
