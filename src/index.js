@@ -5,11 +5,18 @@ import React from "react";
 
 import App from "./app/App";
 
+import store from "./app/store";
+import {Provider} from 'react-redux';
+
 // Real DOM
 let rootElement = document.getElementById("root");
 
 // Unidirectional data flow
 // Virtual DOM ==> REAL DOM
-ReactDOM.render(React.createElement(App),
+ReactDOM.render(
+            <Provider store={store}>
+             <App />
+            </Provider>
+    ,
                 rootElement
                )

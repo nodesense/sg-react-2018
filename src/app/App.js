@@ -9,12 +9,34 @@ import "./App.css"
 import Contact from "./components/Contact";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
- 
-import {BrowserRouter as Router, 
-        Switch, 
-        Route
-    } from 'react-router-dom';
 
+import ProductList from "./redux-cart/containers/ProductList";
+
+//import ReduxCart from "./redux-cart/containers/Cart";
+
+
+import {BrowserRouter as Router, 
+    Switch, 
+    Route
+} from 'react-router-dom';
+
+
+import Loadable from 'react-loadable';
+
+function Loading() {
+    return (
+        <div> 
+            Loading ...
+        </div>
+    )
+}
+
+const ReduxCart = Loadable({
+    loader: () => import('./redux-cart/containers/Cart'),
+    loading: Loading,
+  });
+
+ 
 // V.dom
 export default class App extends  Component {
     constructor() {
@@ -47,6 +69,8 @@ export default class App extends  Component {
                 <Switch>
                  <Route path="/" exact component={Home} />
                  <Route path="/cart"   component={Cart} />
+                 <Route path="/redux-cart" component={ReduxCart} />
+                 <Route path="/products" component={ProductList} />
                  <Route path="/about" component={About} />
                  <Route path="/contact/:country" component={Contact} />
                  <Route path="*" component={NotFound} />
